@@ -1,0 +1,93 @@
+<%@ include file = "/jsp/common/fnUmCommon.jsp" %>
+<%@ page contentType="text/html;charset=euc-kr" %>
+<html>
+<head>
+<title>아이디/비밀번호 찾기</title>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+
+<link rel="stylesheet" href="/css/EP.css" type="text/css">
+<link rel="stylesheet" href="/css/button.css" type="text/css">
+<script language="JavaScript">
+<!--
+function f_submit()
+{
+	findIDPW.submit();
+}
+//-->
+</script>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" topmargin="0" leftmargin="0" background="/img/bg01.gif">
+	<table width="800" border="0" cellpadding="0" cellspacing="0" height="100%"  background="/img/bg_sub.gif">
+		<tr valign="bottom" height="57"> 
+			<td rowspan="2" valign="top"><img src="/img/sub_title_01.jpg" width="35" height="64"></td>
+			<td colspan="2" background="/img/sub_title_02.jpg" width="788" height="57" class="HEADLINE">&nbsp;&nbsp; 아이디/비밀번호 찾기</td>
+		</tr>
+		<tr height="7"> 
+			<td colspan="2" valign="top"><img src="/img/sub_title_03.jpg" width="788" height="7"></td>
+		</tr>
+		<tr height="21"> 
+			<td colspan="3"></td>
+		</tr>
+		<tr valign="top"> 
+			<td width="35"></td>
+			<td width="760" align="center"> <br>
+				<table width="350" border="0" cellspacing="0" cellpadding="0" bgcolor="#E7E7E7">
+<form name="findIDPW" method="post" action="/servlet/user.HP_PAV_FindIDPW">
+					<tr>
+						<td class="text" height="12" width="20"></td>
+						<td class="text" height="12" width="336"></td>
+					</tr>
+					<tr>
+						<td class="txt1" height="30" width="20"></td>
+						<td class="fontb" height="30" width="336">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름:
+							<input type="text" name="username">
+						</td>
+					</tr>
+					<tr>
+						<td class="txt1" height="30" width="20"></td>
+						<td class="fontb" height="30" width="336">주민등록번호:
+							<input type="text" name="registno1" size="8" maxlength="6"> - <input type="text" name="registno2" size="9" maxlength="7">
+						</td>
+					</tr>
+					<tr>
+						<td class="txt1" height="30" width="20"></td>
+						<td class="fontp" height="30" width="336">
+							<input type="radio" name="searchgubun" value="id" checked>
+							아이디찾기
+							<input type="radio" name="searchgubun" value="pw">
+							비밀번호찾기
+						</td>
+					</tr>
+					<tr>
+						<td class="text" height="12"></td>
+						<td class="text" height="12"></td>
+					</tr>
+</form>
+				</table>
+				<br>
+				<table width="100%" cellpadding="2" cellspacing="2">
+					<tr>
+
+						<td width="52%" align="right">
+							<a href ="JavaScript:f_submit();"><img src="/img/bt_ok.gif" align="absmiddle"  border=0 width="56" height="20"></a>
+						</td>
+						<td width="5" align="left">&nbsp;</td>
+						<td width="48%" align="left">
+							<a href="#" onClick="JavaScript:window.close()"><img name="Image3" border="0" src="/img/bu_cancel.gif" align="absmiddle" width="56" height="20"></a>
+						</td>
+
+					</tr>
+				</table>
+				<br>
+			</td>
+		</tr>
+		<tr> 
+			<td colspan="3" height="50"> 
+				<%@ include file="/jsp/common/Footer.jsp"%>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
+

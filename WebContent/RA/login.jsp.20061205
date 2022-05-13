@@ -1,0 +1,144 @@
+ <!--/************************************************************************/
+/*                                                                          */
+/*    Program ID    :     login.jsp                                         */
+/*                                                                          */
+/*    description   :     운영자 로그인         							*/
+/*                                                                          */
+/****************************************************************************/
+/*  최초생성         2002.08.01          배 수 진                           */
+/**************************************************************************-->
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page language="java" import="java.io.*, java.lang.*,servlets.*" %>
+<%String msg	= request.getParameter("msg")==null?"":request.getParameter("msg");%>
+<%
+// decode
+String sabun = null;
+String name = null;
+String buseo = null;
+String jichong = null;
+String jikchek = null;
+try {
+	Cookie[] cookies = request.getCookies();
+
+	for (int i=0; i < cookies.length; i++) {
+		if (cookies[i].getName().equals("SABUN")){ sabun = login.decode(cookies[i].getValue());}
+		if (cookies[i].getName().equals("NAME")){ name = login.decode(cookies[i].getValue());}
+		if (cookies[i].getName().equals("BUSEO")){ buseo = login.decode(cookies[i].getValue());}
+		if (cookies[i].getName().equals("JICHONG")){ jichong = login.decode(cookies[i].getValue());}
+		if (cookies[i].getName().equals("JIKCHEK")){ jikchek = login.decode(cookies[i].getValue());}
+	}
+} catch (Exception e) {}
+
+try {
+	if (msg.equals("logoff")) {
+		Cookie[] cookies = request.getCookies();
+
+		for (int i=0; i < cookies.length; i++) {
+			Cookie cook=cookies[i];
+			cook.setMaxAge(0);
+			response.addCookie(cook);
+		}
+	}
+} catch (Exception e) {}
+%>
+
+<HTML>
+<HEAD>
+<TITLE>로그인 화면</TITLE>
+<LINK rel="stylesheet" type="text/css" href="/css/UM.css">
+<SCRIPT language="javascript">
+<!--
+function login() {
+	if(document.forms[0].id.value =='' || document.forms[0].id.value.length > 8){
+		alert('아이디는 필수입력항목이며 8자리 이하로 입력하셔야 합니다.');
+		document.forms[0].id.select();
+		document.forms[0].id.focus();
+		return;
+	}
+	if(document.forms[0].password.value =='' || document.forms[0].password.value.length > 10){
+		alert('아이디는 필수입력항목이며 10자리 이하로 입력하셔야 합니다.');
+		document.forms[0].password.select();
+		document.forms[0].password.focus();
+		return;
+	}
+	document.forms[0].submit();
+}
+//-->
+</script>
+</HEAD>
+<BODY>
+<CENTER>
+<FORM name="fm" method="post" action="/servlet/servlets.login">
+
+<%if (msg.equals("0")){%>
+<table width="300" border="0" cellpadding="0">
+	<tr class="fontb">
+		<td class="tdac">
+			성공
+		</td>
+	</tr>
+	<tr>
+		<td class="tdbc">
+			<br>로그인에 성공하였습니다.&nbsp;<br><br>
+			사번 : <%=sabun%>&nbsp;<br>
+			이름 : <%=name%>&nbsp;<br>
+			부서 : <%=buseo%>&nbsp;<br>
+			지청 : <%=jichong%>&nbsp;<br>
+			직책 : <%=jikchek%><br>&nbsp;
+			<a href="http://www.g2b.go.kr:8070/jsp/RA/login.jsp?msg=logoff"><img src="http://www.g2b.go.kr/img/button03.gif" border="0"></a>
+		</td>
+	</tr>
+
+</table>
+
+<%}else if (msg.equals("10")){%>
+<table width="300" border="0" cellpadding="0">
+	<tr class="fontb">
+		<td class="tdac">
+			에러
+		</td>
+	</tr>
+	<tr>
+		<td class="tdbc">
+			<br>ID가 존재하지 않습니다.<br>&nbsp;
+		</td>
+	</tr>
+</table>
+
+<%}else if (msg.equals("11")){%>
+<table width="300" border="0" cellpadding="0">
+	<tr class="fontb">
+		<td class="tdac">
+			에러
+		</td>
+	</tr>
+	<tr>
+		<td class="tdbc">
+			<br>PASSWORD가 일치하지 않습니다.<br>&nbsp;
+		</td>
+	</tr>
+</table>
+
+<%}else{%>
+<TABLE width="250" cellpadding="2" cellspacing="1">
+	<TR>
+		<TD class="tdar" width="80">
+			아 이 디 :&nbsp;
+		</TD>
+		<TD class="tdb" width="170">
+			&nbsp;<INPUT type="text" name="id" size="15" maxlength="8" class="read">
+		</TD>
+	<TR>
+		<TD class="tdar">
+			패스워드 :&nbsp;
+		</TD>
+		<TD class="tdb">
+			&nbsp;<INPUT type="password" name="password" size="15" maxlength="10" class="read">
+			&nbsp;<A href="javascript:login()"><img src="/img/bu_ok.gif" border="0" align="absmiddle"></A>
+		</TD>
+	</TR>
+</TABLE>
+<%}%>
+</FORM>
+</CENTER>
+</BODY>
